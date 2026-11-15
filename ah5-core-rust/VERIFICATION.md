@@ -13,7 +13,7 @@ Reference roots:
 - `OLD/Arrowhead/ah5-core-java-spring/`
 - `OLD/Arrowhead/ah5-common-java-spring/`
 
-`documentation/contracts.json` records SHA-256 hashes of 873 local Java files, the extracted reference mappings, Rust mappings and service descriptors. The local reference includes workspace changes; a pristine upstream v5.2.2 tag was not asserted or independently verified.
+`documentation/contracts.json` records SHA-256 hashes of 891 local Java files, the extracted reference mappings, Rust mappings and service descriptors. It was regenerated on 2026-11-15 with `make contracts` against `Eclipse-Arrowhead-java` at `4a175621` (`ah5-core-java-spring` and `ah5-common-java-spring`): 93 Java HTTP mappings, all present in Rust, none missing or unresolved; before, it recorded 873 files and 91 mappings of the earlier `Arrowhead/` trees. The two additional mappings are DynamicServiceOrchestration's `plant-rules` query and replace. The generated LaTeX documents were not replaced by that run: the committed ones carry later hand edits (the 23 October PDE/DSO section and dates) that the generator does not produce. The local reference includes workspace changes; a pristine upstream v5.2.2 tag was not asserted or independently verified.
 
 ## Executed checks
 

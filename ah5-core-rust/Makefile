@@ -11,7 +11,7 @@ check:
 test:
 	$(CARGO) test --locked --all-targets
 contracts:
-	$(CARGO) run --locked -p arrowhead-core-rust --bin core-documentation -- ../../Eclipse-Arrowhead-java/ah5-core-java-spring ../../Arrowhead/ah5-common-java-spring
+	$(CARGO) run --locked -p arrowhead-core-rust --bin core-documentation -- ../../Eclipse-Arrowhead-java/ah5-core-java-spring ../../Eclipse-Arrowhead-java/ah5-common-java-spring
 docs: contracts
 	cd documentation && pdflatex -interaction=nonstopmode -halt-on-error Rust-Core-Systems.tex
 	cd documentation && pdflatex -interaction=nonstopmode -halt-on-error Rust-Core-Systems.tex
