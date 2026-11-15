@@ -92,7 +92,8 @@ fn preamble(title: &str, kind: &str, short: &str) -> String {
         esc(title)
     )
 }
-/// Hand-written section of 23 October 2026 that every DynamicServiceOrchestration document carries; kept verbatim.
+/// Hand-written section of 23 October 2026 that every DynamicServiceOrchestration document carries. Kept as written,
+/// except one sentence removed on 15 November 2026 (translation/QoS "remain unsupported"), which the code had overtaken.
 const DSO_PLANT_EXTENSION: &str = include_str!("dso_plant_extension_2026_10_23.tex");
 /// Finishes a per-system document. DynamicServiceOrchestration documents are the 23 October edition: that date, the
 /// table padding its extension table uses, and the extension section before the end of the document.
