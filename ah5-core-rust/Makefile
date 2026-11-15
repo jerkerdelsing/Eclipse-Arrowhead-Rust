@@ -1,6 +1,6 @@
 CARGO ?= cargo
 SYSTEMS = serviceregistry authentication consumer-authorization serviceorchestration-dynamic serviceorchestration-simple
-.PHONY: build check test contracts docs
+.PHONY: build check test contracts contracts-check docs
 build:
 	$(CARGO) build --locked --release -p arrowhead-core-rust --bins
 	mkdir -p bin
@@ -12,6 +12,9 @@ test:
 	$(CARGO) test --locked --all-targets
 contracts:
 	$(CARGO) run --locked -p arrowhead-core-rust --bin core-documentation -- ../../Eclipse-Arrowhead-java/ah5-core-java-spring ../../Eclipse-Arrowhead-java/ah5-common-java-spring
+# Fails when the committed documents, examples or contracts.json differ from what the generator writes.
+contracts-check: contracts
+	git diff --exit-code -- documentation examples
 docs: contracts
 	cd documentation && pdflatex -interaction=nonstopmode -halt-on-error Rust-Core-Systems.tex
 	cd documentation && pdflatex -interaction=nonstopmode -halt-on-error Rust-Core-Systems.tex

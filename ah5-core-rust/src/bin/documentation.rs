@@ -92,6 +92,30 @@ fn preamble(title: &str, kind: &str, short: &str) -> String {
         esc(title)
     )
 }
+/// Hand-written section of 23 October 2026 that every DynamicServiceOrchestration document carries; kept verbatim.
+const DSO_PLANT_EXTENSION: &str = include_str!("dso_plant_extension_2026_10_23.tex");
+/// Finishes a per-system document. DynamicServiceOrchestration documents are the 23 October edition: that date, the
+/// table padding its extension table uses, and the extension section before the end of the document.
+fn finish(name: &str, doc: String) -> String {
+    if name != "DynamicServiceOrchestration" {
+        return doc;
+    }
+    let body = doc
+        .strip_suffix("\\end{document}\n")
+        .expect("a generated document ends with \\end{document}")
+        .trim_end_matches('\n');
+    format!("{body}\n{DSO_PLANT_EXTENSION}\n\\end{{document}}\n")
+        .replacen(
+            "\\ArrowheadDate{2026-10-16}",
+            "\\ArrowheadDate{2026-10-23}",
+            1,
+        )
+        .replacen(
+            "\\setlength{\\parskip}{5pt}\n",
+            "\\setlength{\\parskip}{5pt}\n\\setlength{\\tabcolsep}{3pt}\n",
+            1,
+        )
+}
 fn limitations(role: &str) -> &'static str {
     match role {
         "serviceregistry" => {
@@ -289,13 +313,13 @@ fn run() -> AnyResult<()> {
         let dir = output.join(name);
         write(
             dir.join(format!("{name}-SysD.tex")),
-            &(preamble(&format!("{name} (Rust)"), "System Description", "SysD")
+            &finish(name, preamble(&format!("{name} (Rust)"), "System Description", "SysD")
                 + &body
                 + "\\section{References}\nHashed local Java sources and extracted routes: \\path{contracts.json}. No upstream release-tag provenance is asserted.\\end{document}\n"),
         )?;
         write(
             dir.join(format!("{name}-SysDD.tex")),
-            &(preamble(
+            &finish(name, preamble(
                 &format!("{name} (Rust)"),
                 "System Design Description",
                 "SysDD",
@@ -306,7 +330,7 @@ fn run() -> AnyResult<()> {
         )?;
         write(
             dir.join(format!("{name}-HTTPS-IDD.tex")),
-            &(preamble(
+            &finish(name, preamble(
                 &format!("{name} HTTPS / Rust"),
                 "Interface Design Description",
                 "IDD",
@@ -335,7 +359,7 @@ fn run() -> AnyResult<()> {
             doc.push_str("\n\\end{document}\n");
             write(
                 dir.join(format!("{name}-{}-SD.tex", service.definition)),
-                &doc,
+                &finish(name, doc),
             )?;
         }
     }

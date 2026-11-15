@@ -40,13 +40,13 @@ Method & Path & Access\\\midrule\endhead
 \texttt{GET} & \path{/serviceregistry/general/mgmt/get-config} & management\\
 \texttt{POST} & \path{/serviceregistry/general/mgmt/logs} & management\\
 \texttt{GET} & \path{/serviceregistry/monitor/echo} & certificate\\
-\texttt{POST} & \path{/serviceregistry/device-discovery/register} & identity\\
+\texttt{POST} & \path{/serviceregistry/device-discovery/register} & certificate\\
 \texttt{POST} & \path{/serviceregistry/device-discovery/lookup} & identity\\
 \texttt{DELETE} & \path{/serviceregistry/device-discovery/revoke/{name}} & identity\\
-\texttt{POST} & \path{/serviceregistry/system-discovery/register} & identity\\
+\texttt{POST} & \path{/serviceregistry/system-discovery/register} & certificate\\
 \texttt{POST} & \path{/serviceregistry/system-discovery/lookup} & identity\\
 \texttt{DELETE} & \path{/serviceregistry/system-discovery/revoke} & identity\\
-\texttt{POST} & \path{/serviceregistry/service-discovery/register} & identity\\
+\texttt{POST} & \path{/serviceregistry/service-discovery/register} & certificate\\
 \texttt{POST} & \path{/serviceregistry/service-discovery/lookup} & identity\\
 \texttt{DELETE} & \path{/serviceregistry/service-discovery/revoke/{instanceId}} & identity\\
 \texttt{POST} & \path{/serviceregistry/mgmt/devices/query} & management\\
@@ -148,14 +148,14 @@ Errors contain errorMessage, errorCode, exceptionType, origin and timestamp. Exa
 \subsection{System overview}
 Native Rust implementation of the local Java module \path{serviceorchestration-dynamic/}. Each named executable checks its configured role and owns an independent identity, listen port and state file. Shared Rust modules implement the runtime; no Java, Python or Go process implements the service.
 \subsection{Produced and consumed services}
-Produced HTTPS definitions: \path{generalManagement}, \allowbreak \path{serviceOrchestration}, \allowbreak \path{serviceOrchestrationHistoryManagement}, \allowbreak \path{serviceOrchestrationLockManagement}, \allowbreak \path{serviceOrchestrationPushManagement}. Service versions are 1.0.0; the target system version is 5.2.2. Authorities consumed as applicable are Authentication, ServiceRegistry and ConsumerAuthorization. Explicit pinned HTTPS origins and valid cloud identities must be provisioned.
+Produced HTTPS definitions: \path{generalManagement}, \allowbreak \path{serviceOrchestration}, \allowbreak \path{serviceOrchestrationHistoryManagement}, \allowbreak \path{serviceOrchestrationLockManagement}, \allowbreak \path{serviceOrchestrationPlantManagement}, \allowbreak \path{serviceOrchestrationPushManagement}. Service versions are 1.0.0; the target system version is 5.2.2. Authorities consumed as applicable are Authentication, ServiceRegistry and ConsumerAuthorization. Explicit pinned HTTPS origins and valid cloud identities must be provisioned.
 \subsection{Architecture and persistent state}
 The listener uses Tokio, Hyper/Axum and rustls with mandatory client certificates. Verified peer identity is supplied through a private request extension, never a declared-identity header. Business modules share locked JSON state with clone/validate/fsync/rename transactions. Credentials and keys are separate owner-only files. Cross-system operations and callbacks are not distributed transactions.
 \subsection{Security}
 Local cloud CN/profile, certificate chain and validity are verified. Identity tokens are checked against Authentication and bound to the client certificate. Management requires a verified sysop or explicit broad whitelist. Outbound peer chain/SAN and expected system CN/profile are checked before credentials are sent. Optional PEM CRLs are enforced at startup-configured trust boundaries and require process restart to reload. No plaintext HTTP listener, TLS bypass or declared SYSTEM identity mode is provided.
 \subsection{Implementation status and delimitations}
 This is a development profile, not a certified interchangeable Java replacement. HTTP route presence is not semantic equivalence. Java database migration, MQTT application APIs and production qualification remain outstanding.
-Local discovery, authorization, operation filtering, token assignment, preferred providers, matchmaking, exclusive locks, history and HTTPS push are implemented. Inter-cloud, translation, QoS, complete blacklist integrations and automatic registry-event-driven reevaluation are not ported; requested unsupported integrations fail with 501. Do not replace working federation with this profile.
+Local/inter-cloud orchestration, authorization, operation filtering, tokens, preferences, matchmaking, locks, history and HTTPS push are implemented. The local PDE extension adds atomic persistent plant scopes and ranked providers; managed scopes cannot escape through inter-cloud flags. Translation bridges, QoS sort/filter and the provider blacklist filter follow the Java LocalServiceOrchestration behind translationEnabled, qosEnabled and blacklistFilter; registry-event-driven reevaluation and full Java parity remain unqualified.
 \clearpage
 \subsection{HTTPS interface operations}
 HTTPS uses JSON unless an operation specifies text. Request bodies are limited to 1 MiB; upstream responses to 8 MiB. Identity-token format: \texttt{Bearer IDENTITY-TOKEN//token}. Certificate-only identity operations still require verified mutual TLS and apply credential/certificate binding.
@@ -171,6 +171,8 @@ Method & Path & Access\\\midrule\endhead
 \texttt{DELETE} & \path{/serviceorchestration/orchestration/mgmt/push/unsubscribe} & management\\
 \texttt{POST} & \path{/serviceorchestration/orchestration/mgmt/push/query} & management\\
 \texttt{POST} & \path{/serviceorchestration/orchestration/mgmt/history/query} & management\\
+\texttt{POST} & \path{/serviceorchestration/mgmt/plant-rules/query} & management\\
+\texttt{PUT} & \path{/serviceorchestration/mgmt/plant-rules/replace} & management\\
 \texttt{POST} & \path{/serviceorchestration/orchestration/mgmt/lock/create} & management\\
 \texttt{POST} & \path{/serviceorchestration/orchestration/mgmt/lock/query} & management\\
 \texttt{DELETE} & \path{/serviceorchestration/orchestration/mgmt/lock/remove/{owner}} & management\\

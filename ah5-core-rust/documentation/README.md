@@ -2,7 +2,7 @@
 
 The five system directories contain editable SysD (system description), SysDD (system design), SD (service description) and HTTPS IDD (interface design) documents. All are marked **DEVELOPMENT**, targeting system version 5.2.2. They describe the delivered Rust profile and its real limitations, not a completed equivalence certification.
 
-The original `arrowhead.cls` and logo come from the local Arrowhead roadmap LaTeX templates. The native Rust generator in `src/bin/documentation.rs` writes the documents, configuration examples and `contracts.json` source/route audit. Make durable document changes in the generator. Do not put operational configuration or secrets in the generated example directory.
+The original `arrowhead.cls` and logo come from the local Arrowhead roadmap LaTeX templates. The native Rust generator in `src/bin/documentation.rs` writes the documents, configuration examples and `contracts.json` source/route audit. Make durable document changes in the generator. The generator's output and the committed sources are identical (`make contracts-check`). The hand-written "PDE and DSO snapshot extension (23 October 2026)" section of the nine DynamicServiceOrchestration documents is kept verbatim in `src/bin/dso_plant_extension_2026_10_23.tex` and appended by the generator; edit it there. Do not put operational configuration or secrets in the generated example directory.
 
 From the repository root:
 

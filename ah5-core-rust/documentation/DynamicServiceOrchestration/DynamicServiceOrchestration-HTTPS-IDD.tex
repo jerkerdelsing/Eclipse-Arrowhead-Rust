@@ -40,7 +40,7 @@ Method & Path & Access\\\midrule\endhead
 \bottomrule\end{longtable}
 Errors contain errorMessage, errorCode, exceptionType, origin and timestamp. Exact validation/error parity and all Java security-policy settings remain release gates. Unknown routes return 404; unavailable authorities fail closed.
 \section{Limitations}
-Local/inter-cloud orchestration, authorization, operation filtering, tokens, preferences, matchmaking, locks, history and HTTPS push are implemented. The local PDE extension adds atomic persistent plant scopes and ranked providers; managed scopes cannot escape through inter-cloud flags. Translation, QoS, complete blacklist pipelines, registry-event-driven reevaluation and full Java parity remain unqualified.
+Local/inter-cloud orchestration, authorization, operation filtering, tokens, preferences, matchmaking, locks, history and HTTPS push are implemented. The local PDE extension adds atomic persistent plant scopes and ranked providers; managed scopes cannot escape through inter-cloud flags. Translation bridges, QoS sort/filter and the provider blacklist filter follow the Java LocalServiceOrchestration behind translationEnabled, qosEnabled and blacklistFilter; registry-event-driven reevaluation and full Java parity remain unqualified.
 \section{PDE and DSO snapshot extension (23 October 2026)}
 The local Java, Go and native Rust implementations provide the same HTTPS snapshot contract. The registered service is \texttt{serviceOrchestrationPlantManagement}, version 1.0.0. The API is a local extension to the upstream framework.
 \begin{longtable}{p{0.12\textwidth}p{0.70\textwidth}}\toprule

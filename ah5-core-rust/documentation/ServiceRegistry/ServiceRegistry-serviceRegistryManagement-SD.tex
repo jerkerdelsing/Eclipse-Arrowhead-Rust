@@ -22,24 +22,24 @@ Interface: \texttt{generic\_https}, policy \texttt{CERT\_AUTH}; the application 
 \section{Operations}
 \begin{longtable}{p{0.32\textwidth}p{0.12\textwidth}p{0.46\textwidth}}\toprule
 Operation & Method & Relative path\\\midrule\endhead
-\path{create-devices} & \texttt{POST} & \path{/mgmt/devices}\\
-\path{create-interface-templates} & \texttt{POST} & \path{/mgmt/interface-templates}\\
-\path{create-service-definitions} & \texttt{POST} & \path{/mgmt/service-definitions}\\
-\path{create-service-instances} & \texttt{POST} & \path{/mgmt/service-instances}\\
-\path{create-systems} & \texttt{POST} & \path{/mgmt/systems}\\
-\path{query-devices} & \texttt{POST} & \path{/mgmt/devices/query}\\
-\path{query-interface-templates} & \texttt{POST} & \path{/mgmt/interface-templates/query}\\
-\path{query-service-definitions} & \texttt{POST} & \path{/mgmt/service-definitions/query}\\
-\path{query-service-instances} & \texttt{POST} & \path{/mgmt/service-instances/query}\\
-\path{query-systems} & \texttt{POST} & \path{/mgmt/systems/query}\\
-\path{remove-devices} & \texttt{DELETE} & \path{/mgmt/devices}\\
-\path{remove-interface-templates} & \texttt{DELETE} & \path{/mgmt/interface-templates}\\
-\path{remove-service-definitions} & \texttt{DELETE} & \path{/mgmt/service-definitions}\\
-\path{remove-service-instances} & \texttt{DELETE} & \path{/mgmt/service-instances}\\
-\path{remove-systems} & \texttt{DELETE} & \path{/mgmt/systems}\\
-\path{update-devices} & \texttt{PUT} & \path{/mgmt/devices}\\
-\path{update-service-instances} & \texttt{PUT} & \path{/mgmt/service-instances}\\
-\path{update-systems} & \texttt{PUT} & \path{/mgmt/systems}\\
+\path{device-create} & \texttt{POST} & \path{/mgmt/devices}\\
+\path{device-query} & \texttt{POST} & \path{/mgmt/devices/query}\\
+\path{device-remove} & \texttt{DELETE} & \path{/mgmt/devices}\\
+\path{device-update} & \texttt{PUT} & \path{/mgmt/devices}\\
+\path{interface-template-create} & \texttt{POST} & \path{/mgmt/interface-templates}\\
+\path{interface-template-query} & \texttt{POST} & \path{/mgmt/interface-templates/query}\\
+\path{interface-template-remove} & \texttt{DELETE} & \path{/mgmt/interface-templates}\\
+\path{service-create} & \texttt{POST} & \path{/mgmt/service-instances}\\
+\path{service-definition-create} & \texttt{POST} & \path{/mgmt/service-definitions}\\
+\path{service-definition-query} & \texttt{POST} & \path{/mgmt/service-definitions/query}\\
+\path{service-definition-remove} & \texttt{DELETE} & \path{/mgmt/service-definitions}\\
+\path{service-query} & \texttt{POST} & \path{/mgmt/service-instances/query}\\
+\path{service-remove} & \texttt{DELETE} & \path{/mgmt/service-instances}\\
+\path{service-update} & \texttt{PUT} & \path{/mgmt/service-instances}\\
+\path{system-create} & \texttt{POST} & \path{/mgmt/systems}\\
+\path{system-query} & \texttt{POST} & \path{/mgmt/systems/query}\\
+\path{system-remove} & \texttt{DELETE} & \path{/mgmt/systems}\\
+\path{system-update} & \texttt{PUT} & \path{/mgmt/systems}\\
 \bottomrule\end{longtable}
 \section{Important delimitations}
 Development service profile, not complete Java behavioral equivalence. See system SysDD and HTTPS IDD for trust boundaries, DTO reference and restrictions.
