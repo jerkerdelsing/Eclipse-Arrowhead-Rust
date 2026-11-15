@@ -42,7 +42,7 @@ Set `register:true` only with verified core dependencies and appropriate policie
 
 ## Documentation
 
-Arrowhead-style editable LaTeX uses the repository's original `arrowhead.cls` and logo. Per profile: SysD, SysDD, HTTPS IDD, and produced-service SDs. `documentation/contracts.json` includes SHA256 Java source inventory, 107 Spring mapping comparisons and per-route implementation flags. Four shared-runtime systems use manual route review, not Spring extraction. Mapping coverage does not establish behavioral equivalence or provenance of an upstream v5.2.2 release.
+Arrowhead-style editable LaTeX uses the repository's original `arrowhead.cls` and logo. Per profile: SysD, SysDD, HTTPS IDD, and produced-service SDs. `documentation/contracts.json` includes SHA256 Java source inventory, 107 Spring mapping comparisons and per-route implementation flags. Four shared-runtime systems use manual route review, not Spring extraction. Mapping coverage does not establish behavioral equivalence or provenance of an upstream v5.2.2 release. `contracts.json` is a historical record (status 2026-11-15): its 910 Java reference files are the earlier `OLD/Arrowhead/ah5-*-java-spring` trees, not `Eclipse-Arrowhead-java`, and 37 of them (18 in the common library, 19 in five support systems) were edited between 17 and 24 October 2026, after extraction, so their recorded hashes no longer match. It is not read by the build, the tests or a deployment.
 
 ```
 make contracts JAVA_SUPPORT='../ah5-support-java-spring' JAVA_COMMON='../ah5-common-java-spring'

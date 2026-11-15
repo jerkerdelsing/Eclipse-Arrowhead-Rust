@@ -65,7 +65,14 @@ Missing password fails closed for `/api/` but does not disable static assets, he
 make docs
 ```
 
-Run from this module. The original source defaults to ../../Arrowhead-test-cloud-rust/core-systems for read-only source hashing; override REFERENCE when needed. `docs/source-manifest.json` records original and relocated hashes plus the route inventory. Read VERIFICATION.md for actual test/build evidence. The repository's original Arrowhead LaTeX class/logo is reused.
+Run from this module with `REFERENCE=<path to the original core-systems package>`; it is read only for source hashing. That package is no longer in the workspace, so `make docs` has no default and stops without it; running it rewrites `docs/source-manifest.json`.
+
+**Historical records (status 2026-11-15).** `docs/source-manifest.json` and `docs/secure-source-manifest.json` describe the relocation of this module, not its current state, and are kept unchanged:
+
+- `source-manifest.json` records original and relocated hashes plus the route inventory. Its `referenceRoot` (`Arrowhead/Arrowhead-test-cloud-rust/core-systems`) no longer exists, so the original hashes cannot be rechecked; of the 14 relocated files, 3 still match, 10 have changed through later development, and `Cargo.lock` is now the workspace's.
+- `secure-source-manifest.json` lists 55 files in the earlier `support/...` layout; all are under `OLD/Arrowhead/ah5-support-rust/` in the workspace (35 with the recorded hash). Its `additionalSourceManifest` (`.../candidate-native/replacement-source-manifest.json`) no longer exists.
+
+Neither file is read by the build, the tests or a deployment. Read VERIFICATION.md for actual test/build evidence. The repository's original Arrowhead LaTeX class/logo is reused.
 
 ## Listening port
 
